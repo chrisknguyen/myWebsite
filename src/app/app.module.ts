@@ -11,7 +11,7 @@ import { TopNavModule } from "./shared/components/top-nav/top-nav.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    TopNavModule
+    TopNavModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
