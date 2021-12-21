@@ -9,27 +9,11 @@
     </div>
   </div>
 
-  <div *ngFor="let lesson of lessons">
-    <h5>{{lesson.title}}</h5>
-    <p>{{lesson.description}}</p>
-  </div>
-<div *ngFor="let test of tests">
-  {{test}}
-</div>
   <div class="row" style="margin-top: 190px">
-    <!--    <ul>-->
-    <!--      <li *ngFor="let lesson of lessons; let i = index" style="padding: 25px">-->
-    <!--        <h5>{{lesson.title}}</h5>-->
-    <!--        {{i}}-->
-    <!--        <p>{{lesson.description}}</p>-->
-    <!--      </li>-->
-    <!--    </ul>-->
-
-    <!--    <div class="col-sm-3" style="padding: 25px">-->
-    <!--      <h5>Awesome Title Header</h5>-->
-    <!--      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad asperiores at, deleniti dolore doloremque doloribus ducimus error fugit harum labore-->
-    <!--        minima, necessitatibus officiis possimus quas quia reiciendis sit vel!</p>-->
-    <!--    </div>-->
+        <div class="col-sm-3" style="padding: 25px" *ngFor="let lesson of lessons">
+          <h5>{{lesson.title}}</h5>
+          <p>{{lesson.description}}</p>
+        </div>
   </div>
 </div>
 

@@ -4,6 +4,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopNavModule } from "./shared/components/top-nav/top-nav.module";
 import { FooterModule } from "./shared/components/footer/footer.module";
+import { HomeModule } from "./home/home.module";
+import { ContactModule } from "./contact/contact.module";
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { FooterModule } from "./shared/components/footer/footer.module";
     BrowserModule,
     AppRoutingModule,
     TopNavModule,
-    FooterModule
+    FooterModule,
+    HomeModule,
+    ContactModule
   ],
   providers: [],
   bootstrap: [AppComponent]

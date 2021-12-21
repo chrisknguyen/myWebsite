@@ -14,9 +14,6 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
     this.lessons = lessons;
-    this.lessons.forEach((lesson: any) => {
-      console.log('test test test lessons', lesson);
-    })
   }
 
 }
