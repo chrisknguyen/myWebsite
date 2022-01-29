@@ -7,6 +7,7 @@ import { FooterModule } from './shared/components/footer/footer.module';
 import { HomeModule } from './home/home.module';
 import { ContactModule } from './contact/contact.module';
 import { BinarySearchModule } from './algorithms/binary-search/binary-search.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { BinarySearchModule } from './algorithms/binary-search/binary-search.mod
     FooterModule,
     HomeModule,
     ContactModule,
-    BinarySearchModule
+    BinarySearchModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
