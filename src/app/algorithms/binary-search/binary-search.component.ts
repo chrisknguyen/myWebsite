@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CoinDataService } from '../../shared/services/coin-data.service';
 import * as _ from 'lodash';
 
 @Component({
@@ -9,7 +10,7 @@ import * as _ from 'lodash';
 export class BinarySearchComponent implements OnInit {
   listOfNumbers: number[];
 
-  constructor() {
+  constructor(private coinService: CoinDataService) {
   }
 
   ngOnInit(): void {
@@ -23,6 +24,17 @@ export class BinarySearchComponent implements OnInit {
     } else {
       console.log('RECURSIVE Technique Element NOT found!', findNumb);
     }
+
+    this.getCoins();
+  }
+
+  getCoins(): void {
+    const url = 'https://api.coingecko.com/api/v3/coins';
+    this.coinService.get(url).subscribe((response) => {
+      console.log('response', response);
+    }, (error) => {
+      console.log('error', error);
+    });
   }
 
   recursiveSearch(arr: Array<number>, x: number, start: number, end: number, hits: number): boolean {
