@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { lessons } from "../home/lessons-data";
 
 @Component({
   selector: 'app-contact',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
+  lessons: any;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+    this.lessons = lessons;
   }
 
 }
