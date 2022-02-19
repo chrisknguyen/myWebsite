@@ -5,6 +5,15 @@
       <div class="card-body bg-swiss-coffee">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias architecto at consequuntur dolores eligendi harum incidunt ipsam, ipsum iusto libero
           nobis placeat quaerat quam quod sed tenetur ut vel voluptates.</p>
+
+        <ul>
+          <li *ngFor="let coin of coins; trackBy: trackBySymbol">
+            <h3>
+              {{coin.id}}:
+            </h3>
+            <p>{{coin.market_data.current_price.usd | currency}}</p>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

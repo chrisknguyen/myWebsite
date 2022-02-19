@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoinDataService } from '../../shared/services/coin-data.service';
 import * as _ from 'lodash';
+import { observable } from 'rxjs';
 
 @Component({
   selector: 'app-binary-search',
@@ -9,53 +10,88 @@ import * as _ from 'lodash';
 })
 export class BinarySearchComponent implements OnInit {
   listOfNumbers: number[];
+  coins: Array<any>;
+  observableX: any;
+  sortedList: Array<any>;
 
   constructor(private coinService: CoinDataService) {
   }
 
   ngOnInit(): void {
-    this.listOfNumbers = [100, 12, 14, 13, 14, 15, 22, 24, 23, 61, 52, 45, 67, 2, 3, 4, 66, 42, 47, 72, 23, 11, 10, 8, 7, 5, 6, 99, 100, 200, 199, 112, 111, 113, 115, 165, 164, 163, 154, 124, 101, 102, 103, 104, 105, 130, 131, 132, 133, 134, 135, 136];
-
-    const sortedList = _.sortBy(this.listOfNumbers);
-    const findNumb = 115;
-
-    if (this.recursiveSearch(sortedList, findNumb, 0, sortedList.length - 1, 0)) {
-      console.log('RECURSIVE Technique Element found!', findNumb);
-    } else {
-      console.log('RECURSIVE Technique Element NOT found!', findNumb);
-    }
-
     this.getCoins();
+  }
+
+  findItem(findMe: any): void {
+    if (typeof findMe === 'number') {
+      if (this.numberRecursiveSearch(this.sortedList, findMe, 0, this.sortedList.length - 1, 0)) {
+        console.log('RECURSIVE number Technique Element found!', findMe);
+      } else {
+        console.log('RECURSIVE number Technique Element NOT found!', findMe);
+      }
+    } else if (typeof findMe === 'string') {
+      if (this.stringRecursiveSearch(this.sortedList, findMe, 0, this.sortedList.length - 1, 0)) {
+        console.log('RECURSIVE string Technique Element found!', findMe);
+      } else {
+        console.log('RECURSIVE string Technique Element NOT found!', findMe);
+      }
+    }
   }
 
   getCoins(): void {
     const url = 'https://api.coingecko.com/api/v3/coins';
-    this.coinService.get(url).subscribe((response) => {
-      console.log('response', response);
-    }, (error) => {
+    this.observableX = this.coinService.get(url);
+    this.observableX.subscribe((response: any) => {
+      this.coins = response;
+      this.sortedList = _.sortBy(this.coins, 'id');
+      console.log('sortedList', this.sortedList);
+      this.findItem('bitcoin');
+      this.findItem(1);
+    }, (error: any) => {
       console.log('error', error);
     });
   }
 
-  recursiveSearch(arr: Array<number>, x: number, start: number, end: number, hits: number): boolean {
+  numberRecursiveSearch(arr: Array<any>, x: number, start: number, end: number, hits: number): boolean {
     console.log('recursion hit: ', hits + ' times.');
     if (start > end) {
       return false;
     }
 
     const mid = Math.floor((start + end) / 2);
-    if (arr[mid] === x) {
+    if (arr[mid].market_data.market_cap_rank === x) {
       return true;
     }
 
-    if (arr[mid] > x) {
-      return this.recursiveSearch(arr, x, start, mid - 1, hits + 1);
+    if (arr[mid].market_data.market_cap_rank > x) {
+      return this.numberRecursiveSearch(arr, x, start, mid - 1, hits + 1);
     } else {
-      return this.recursiveSearch(arr, x, mid + 1, end, hits + 1);
+      return this.numberRecursiveSearch(arr, x, mid + 1, end, hits + 1);
+    }
+  }
+
+  stringRecursiveSearch(arr: Array<any>, x: string, start: number, end: number, hits: number): boolean {
+    //start cannot be greater than end. If so, there is no point in continuing with the method.
+    if (start >= end) {
+      return false;
+    }
+
+    //
+    const mid = Math.floor((start + end) / 2);
+    if (arr[mid].id === x) {
+      return true;
+    }
+    if (arr[mid].id > x) {
+      return this.stringRecursiveSearch(arr, x, start, mid - 1, hits + 1);
+    } else {
+      return this.stringRecursiveSearch(arr, x, mid + 1, end, hits + 1);
     }
   }
 
   iterrativeSearch(): boolean {
     return false;
+  }
+
+  trackBySymbol(index: number, item: any): string {
+    return item.symbol;
   }
 }
