@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoinDataService } from '../../shared/services/coin-data.service';
 import * as _ from 'lodash';
-import { observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-binary-search',
@@ -11,7 +11,7 @@ import { observable } from 'rxjs';
 export class BinarySearchComponent implements OnInit {
   listOfNumbers: number[];
   coins: Array<any>;
-  observableX: any;
+  observableX: Observable<any>;
   sortedList: Array<any>;
 
   constructor(private coinService: CoinDataService) {
@@ -43,7 +43,6 @@ export class BinarySearchComponent implements OnInit {
     this.observableX.subscribe((response: any) => {
       this.coins = response;
       this.sortedList = _.sortBy(this.coins, 'id');
-      console.log('sortedList', this.sortedList);
       this.findItem('bitcoin');
       this.findItem(1);
     }, (error: any) => {

@@ -11,7 +11,6 @@ export class CoinDataService {
   }
 
   public get<T>(baseUrl: string): Observable<any> {
-    console.log('Observable', Observable);
     return this.http.get(baseUrl);
   }
 }

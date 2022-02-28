@@ -13,4 +13,5 @@ import { BinarySearchRoutingModule } from './binary-search-routing.module';
     BinarySearchComponent
   ]
 })
-export class BinarySearchModule { }
+export class BinarySearchModule {
+}
